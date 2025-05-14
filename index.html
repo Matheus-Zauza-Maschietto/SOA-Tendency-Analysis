@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estatísticas de Nomes Brasileiros</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Estatísticas de Nomes Brasileiros</h1>
+
+        <!-- Primeira Seção -->
+        <section class="section">
+            <h2>Ranking de Nomes</h2>
+            <div class="separator"></div>
+
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Digite um nome">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="anoInicio">Ano Inicial:</label>
+                    <input type="number" id="anoInicio" placeholder="Ex: 1980" min="1900" max="2023">
+                </div>
+                <div class="form-group">
+                    <label for="anoFim">Ano Final:</label>
+                    <input type="number" id="anoFim" placeholder="Ex: 2020" min="1900" max="2023">
+                </div>
+            </div>
+
+            <button id="btnPesquisarRanking" class="btn">Pesquisar</button>
+
+            <div id="graficoRanking" class="grafico">
+                <p>O gráfico de ranking será exibido aqui</p>
+            </div>
+        </section>
+
+        <!-- Segunda Seção -->
+        <section class="section">
+            <h2>Estatísticas por Localidade</h2>
+            <div class="separator"></div>
+
+            <div class="form-group">
+                <label for="uf">Estado (UF):</label>
+                <select id="uf">
+                    <option value="">Selecione um estado</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="municipio">Município:</label>
+                <select id="municipio" disabled>
+                    <option value="">Selecione primeiro um estado</option>
+                </select>
+            </div>
+
+            <button id="btnPesquisarLocalidade" class="btn">Pesquisar</button>
+
+            <div class="resultados">
+                <h3>Resultados:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaResultados">
+                        <tr>
+                            <td>Nome mais frequente #1</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Nome mais frequente #2</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Nome mais frequente #3</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Década mais frequente</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Terceira Seção -->
+        <section class="section">
+            <h2>Comparação de Nomes</h2>
+            <div class="separator"></div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nome1">Primeiro Nome:</label>
+                    <input type="text" id="nome1" placeholder="Digite o primeiro nome">
+                </div>
+                <div class="form-group">
+                    <label for="nome2">Segundo Nome:</label>
+                    <input type="text" id="nome2" placeholder="Digite o segundo nome">
+                </div>
+            </div>
+
+            <button id="btnCompararNomes" class="btn">Comparar</button>
+
+            <div id="graficoComparacao" class="grafico">
+                <p>O gráfico de comparação será exibido aqui</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

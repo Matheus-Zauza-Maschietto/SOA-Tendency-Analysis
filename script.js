@@ -1,3 +1,7 @@
+import locationsService from "./services/locationsService";
+import nameService from "./services/nameService";
+import nameComparisonServiceJs from "./services/nameComparisonService.js";
+
 const btnPesquisarRanking = document.getElementById("btnPesquisarRanking");
 const graficoRanking = document.getElementById("graficoRanking");
 

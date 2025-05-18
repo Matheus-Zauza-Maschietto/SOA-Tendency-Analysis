@@ -2,7 +2,7 @@ class NameComparisonService {
 
   async compareNames(name1, name2) {
     const fetchNameData = async (name) => {
-      const url = `https://servicodados.ibge.gov.br/api/v2/censos/nomes/${name}?localidade=BR`;
+      const url = `https://servicodados.ibge.gov.br/api/v2/censos/nomes/${name}`;
       const response = await fetch(url);
       const data = await response.json();
       if (!data[0] || !data[0].res) throw new Error(`No data for name: ${name}`);

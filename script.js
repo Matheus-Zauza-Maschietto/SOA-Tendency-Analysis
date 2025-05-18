@@ -9,7 +9,6 @@ const tabelaResultados = document.getElementById("tabelaResultados");
 const btnCompararNomes = document.getElementById("btnCompararNomes");
 const graficoComparacao = document.getElementById("graficoComparacao");
 
-
 createOptinsUf();
 
 async function createOptinsUf() {
@@ -85,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
         selectUF.addEventListener("change", async function() {
             const ufSelecionada = this.value;
 
-
             if (!ufSelecionada) {
                 selectMunicipio.innerHTML = '<option value="">Selecione primeiro um estado</option>';
                 selectMunicipio.disabled = true;
@@ -136,7 +134,6 @@ document.addEventListener("DOMContentLoaded", function() {
             };
     
             const linhas = tabelaResultados.getElementsByTagName("tr");
-
     
             for (let i = 0; i < 3; i++) {
                 if (linhas[i] && dadosSimulados.nomesMaisFrequentes[i]) {

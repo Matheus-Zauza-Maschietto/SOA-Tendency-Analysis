@@ -1,10 +1,10 @@
 class LocationService {
     async fetchTopNamesByLocation(locationCode) {
         const results = [];
-        const url = `https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?localidade=${locationCode}&decada=${decade}`;
-
+        
         for (let decade = 1930; decade < new Date().getFullYear(); decade += 10) {
             try {
+                const url = `https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking?localidade=${locationCode}&decada=${decade}`;
                 const response = await fetch(url);
                 const data = await response.json();
 

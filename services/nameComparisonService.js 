@@ -1,0 +1,53 @@
+class NameComparisonService {
+
+  async compareNames(name1, name2) {
+    const fetchNameData = async (name) => {
+      const url = `https://servicodados.ibge.gov.br/api/v2/censos/nomes/${name}?localidade=BR`;
+      const response = await fetch(url);
+      const data = await response.json();
+      if (!data[0] || !data[0].res) throw new Error(`No data for name: ${name}`);
+      return data[0].res;
+    };
+
+    try {
+      const [data1, data2] = await Promise.all([
+        fetchNameData(name1),
+        fetchNameData(name2),
+      ]);
+
+      const decades = [];
+      const freq1 = {};
+      const freq2 = {};
+
+      data1.forEach(item => {
+        decades.push(item.period);
+        freq1[item.period] = item.frequencia;
+      });
+
+      data2.forEach(item => {
+        if (!decades.includes(item.period)) decades.push(item.period);
+        freq2[item.period] = item.frequencia;
+      });
+
+      decades.sort();
+
+      return {
+        decades,
+        name1: {
+          label: name1,
+          data: decades.map(d => freq1[d] || 0)
+        },
+        name2: {
+          label: name2,
+          data: decades.map(d => freq2[d] || 0)
+        }
+      };
+
+    } catch (error) {
+      console.error("Error comparing names:", error);
+      throw error;
+    }
+  }
+}
+
+export default new NameComparisonService();

@@ -9,15 +9,15 @@ class NameService{
         if (!data || !data[0] || !data[0].res) {
             throw new Error("No data found for the provided name.");
         }
+        
+        
 
-        const result = data[0].res;
-
+        const result = data[0].res.slice(1);
         const filtered = result.filter(item => {
-            const match = item.period.match(/\[(\d+),(\d+)\[/);
-            if (!match) return false;
+            const periods = item.periodo.replace("[", "").replace("]").split(",")
 
-            const decadeStart = parseInt(match[1]);
-            const decadeEnd = parseInt(match[2]);
+            const decadeStart = parseInt(periods[0] ?? null);
+            const decadeEnd = parseInt(periods[1] ?? null);
 
             return decadeStart >= startDecade && decadeEnd <= endDecade;
         });

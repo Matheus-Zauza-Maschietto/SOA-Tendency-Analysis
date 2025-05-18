@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estatísticas de Nomes Brasileiros</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
@@ -32,9 +33,8 @@
 
             <button id="btnPesquisarRanking" class="btn">Pesquisar</button>
 
-            <div id="graficoRanking" class="grafico">
-                <p>O gráfico de ranking será exibido aqui</p>
-            </div>
+            <canvas  id="graficoRanking" class="grafico">
+            </canvas >
         </section>
 
         <section class="section">
@@ -62,27 +62,13 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Categoria</th>
-                            <th>Resultado</th>
+                            <th>Década</th>
+                            <th>Nome mais frequente #1</th>
+                            <th>Nome mais frequente #2</th>
+                            <th>Nome mais frequente #3</th>
                         </tr>
                     </thead>
-                    <tbody id="tabelaResultados">
-                        <tr>
-                            <td>Nome mais frequente #1</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Nome mais frequente #2</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Nome mais frequente #3</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>Década mais frequente</td>
-                            <td>-</td>
-                        </tr>
+                    <tbody id="tabelaResultadosMaisFrequenteEstado">
                     </tbody>
                 </table>
             </div>
@@ -105,9 +91,8 @@
 
             <button id="btnCompararNomes" class="btn">Comparar</button>
 
-            <div id="graficoComparacao" class="grafico">
-                <p>O gráfico de comparação será exibido aqui</p>
-            </div>
+            <canvas id="graficoComparacao" class="grafico">
+            </canvas>
         </section>
     </div>
 

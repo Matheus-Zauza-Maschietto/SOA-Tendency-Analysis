@@ -9,7 +9,6 @@ class LocationService {
                 const data = await response.json();
 
                 if (!Array.isArray(data) || data.length === 0 || !data[0].res) {
-                    console.warn(`No data found for decade ${decade}.`);    
                     continue;
                 }
 

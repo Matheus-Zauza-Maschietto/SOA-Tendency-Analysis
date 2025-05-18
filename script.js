@@ -1,23 +1,54 @@
+const btnPesquisarRanking = document.getElementById("btnPesquisarRanking");
+const graficoRanking = document.getElementById("graficoRanking");
+
+const selectUF = document.getElementById("uf");
+const selectMunicipio = document.getElementById("municipio");
+const btnPesquisarLocalidade = document.getElementById("btnPesquisarLocalidade");
+const tabelaResultados = document.getElementById("tabelaResultados");
+
+const btnCompararNomes = document.getElementById("btnCompararNomes");
+const graficoComparacao = document.getElementById("graficoComparacao");
+
+
+createOptinsUf();
+
+async function createOptinsUf() {
+    const ufs = await getUfs();
+
+    ufs.forEach((uf) => {
+        const option = document.createElement("option");
+        option.value = uf.id;
+        option.textContent = uf.nome + " - " + uf.sigla;
+        selectUF.appendChild(option);
+    });
+}
+
+async function getUfs() {
+    const url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados';
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Erro: ${response.status}`);
+        return await response.json();
+    } catch (erro) {
+        console.error('Erro ao consultar API:', erro.message);
+        return null;
+    }
+}
+
+async function getMunicipios(ufId) {
+    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${ufId}/municipios`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Erro: ${response.status}`);
+        return await response.json();
+    } catch (erro) {
+        console.error('Erro ao consultar API:', erro.message);
+        return null;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
-    const btnPesquisarRanking = document.getElementById("btnPesquisarRanking");
-    const graficoRanking = document.getElementById("graficoRanking");
 
-    const selectUF = document.getElementById("uf");
-    const selectMunicipio = document.getElementById("municipio");
-    const btnPesquisarLocalidade = document.getElementById("btnPesquisarLocalidade");
-    const tabelaResultados = document.getElementById("tabelaResultados");
-
-    const btnCompararNomes = document.getElementById("btnCompararNomes");
-    const graficoComparacao = document.getElementById("graficoComparacao");
-
-    const municipiosPorUF = {
-        SP: ["São Paulo", "Campinas", "Santos", "Ribeirão Preto", "São José dos Campos"],
-        RJ: ["Rio de Janeiro", "Niterói", "Duque de Caxias", "Nova Iguaçu", "Petrópolis"],
-        MG: ["Belo Horizonte", "Uberlândia", "Contagem", "Juiz de Fora", "Betim"],
-        RS: ["Porto Alegre", "Caxias do Sul", "Pelotas", "Canoas", "Santa Maria"],
-        BA: ["Salvador", "Feira de Santana", "Vitória da Conquista", "Camaçari", "Itabuna"],
-
-    };
 
     if (btnPesquisarRanking) {
         btnPesquisarRanking.addEventListener("click", function() {
@@ -41,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
     
-    
             graficoRanking.innerHTML = `
                 <div style="text-align: center;">
                     <p style="font-weight: 500;">Dados do ranking para "${nome}" entre ${anoInicio} e ${anoFim}</p>
@@ -52,36 +82,34 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     if (selectUF) {
-        selectUF.addEventListener("change", function() {
+        selectUF.addEventListener("change", async function() {
             const ufSelecionada = this.value;
 
-    
+
             if (!ufSelecionada) {
                 selectMunicipio.innerHTML = '<option value="">Selecione primeiro um estado</option>';
                 selectMunicipio.disabled = true;
                 return;
             }
 
-    
             selectMunicipio.disabled = false;
 
-    
-            const municipios = municipiosPorUF[ufSelecionada] || [];
+            const municipios = await getMunicipios(ufSelecionada) || [];
 
-    
+
             selectMunicipio.innerHTML = "";
 
-    
+
             const optionPadrao = document.createElement("option");
             optionPadrao.value = "";
             optionPadrao.textContent = "Selecione um município";
             selectMunicipio.appendChild(optionPadrao);
 
-    
+
             municipios.forEach(function(municipio) {
                 const option = document.createElement("option");
-                option.value = municipio;
-                option.textContent = municipio;
+                option.value = municipio.id;
+                option.textContent = municipio.nome;
                 selectMunicipio.appendChild(option);
             });
         });
@@ -101,14 +129,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 alert("Por favor, selecione um município.");
                 return;
             }
-
-    
     
             const dadosSimulados = {
                 nomesMaisFrequentes: ["Maria", "João", "Ana"],
                 decadaMaisFrequente: "1980"
             };
-
     
             const linhas = tabelaResultados.getElementsByTagName("tr");
 
@@ -118,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     linhas[i].cells[1].textContent = dadosSimulados.nomesMaisFrequentes[i];
                 }
             }
-
     
             if (linhas[3]) {
                 linhas[3].cells[1].textContent = dadosSimulados.decadaMaisFrequente;
@@ -135,8 +159,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 alert("Por favor, preencha os dois nomes para comparação.");
                 return;
             }
-
-    
     
             graficoComparacao.innerHTML = `
                 <div style="text-align: center;">
@@ -147,5 +169,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-
-

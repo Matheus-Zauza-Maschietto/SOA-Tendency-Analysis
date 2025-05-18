@@ -35,7 +35,6 @@ h3 {
     margin: 15px 0;
 }
 
-/* Seções */
 .section {
     background-color: #fff;
     border-radius: 8px;
@@ -50,7 +49,6 @@ h3 {
     margin: 10px 0 20px;
 }
 
-/* Formulários */
 .form-group {
     margin-bottom: 15px;
 }
@@ -102,7 +100,6 @@ input:focus, select:focus {
     background-color: #3a7bc8;
 }
 
-/* Gráficos */
 .grafico {
     height: 250px;
     background-color: #f9f9f9;
@@ -115,7 +112,6 @@ input:focus, select:focus {
     color: #888;
 }
 
-/* Tabela */
 table {
     width: 100%;
     border-collapse: collapse;

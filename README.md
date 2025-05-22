@@ -8,4 +8,5 @@ A integração com serviços externos permite flexibilidade e fácil manutençã
 
 # Integrantes
 Matheus Zauza Maschietto - 22013969-2
+
 Igor Bondezam França - 22012564-2
